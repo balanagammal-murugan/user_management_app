@@ -7,10 +7,10 @@ import FormControl from '@mui/material/FormControl';
 import './UserInfoInputSection.css'
 import * as constants from '../../helper/constants';
 
-const UserInputSection = ({userInfo,toggleManageUser}) => {
-  const [name, setName] = useState(userInfo.name);
-  const [email, setEmail] = useState(userInfo.email);
-  const [role, setRole] = useState(userInfo.role ? userInfo.role : "User");
+const UserInputSection = (props) => {
+  const [name, setName] = useState(props.userInfo.name);
+  const [email, setEmail] = useState(props.userInfo.email);
+  const [role, setRole] = useState(props.userInfo.role ? props.userInfo.role : "User");
   
   const handleNameChange = (event) => {
     setName(event.target.value);
@@ -30,22 +30,22 @@ const UserInputSection = ({userInfo,toggleManageUser}) => {
   return (
     <>
       <div className='modal-text'>NAME</div>
-      <TextField margin="dense" id="outlined-basic" onChange={handleNameChange} variant="outlined" defaultValue={userInfo.name} />
+      <TextField margin="dense" id="outlined-basic" onChange={handleNameChange} variant="outlined" defaultValue={props.userInfo.name} />
       <div className='modal-text'>EMAIL</div>
-      <TextField margin="dense" id="outlined-basic" onChange={handleEmailChange} variant="outlined" defaultValue={userInfo.email}/>
+      <TextField margin="dense" id="outlined-basic" onChange={handleEmailChange} variant="outlined" defaultValue={props.userInfo.email}/>
       <div className='modal-text'>ROLE</div>
       <FormControl margin="dense">
-            <Select labelId="select-role" id="select-role"  onChange={handleRoleChange} defaultValue = { userInfo.role ? userInfo.role : "User" }>
+            <Select labelId="select-role" id="select-role"  onChange={handleRoleChange} defaultValue = { props.userInfo.role ? props.userInfo.role : "User" }>
                 <MenuItem value="User">User</MenuItem>
                 <MenuItem value="Admin">Admin</MenuItem>
             </Select>
       </FormControl>
-      <Button onClick={() => toggleManageUser()}>{constants.CANCEL}</Button>
+      <Button onClick={() => props.toggleManageUser()}>{constants.CANCEL}</Button>
       <Button 
         variant="contained" 
         sx={{ backgroundColor: '#03b8c5'}}
         onClick={() => createUser()}>
-          {userInfo && userInfo.name ? constants.UPDATE_USER : constants.CREATE_USER}
+          {props.userInfo && props.userInfo.name ? constants.UPDATE_USER : constants.CREATE_USER}
       </Button>
     </>
   )

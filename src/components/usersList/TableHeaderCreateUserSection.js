@@ -6,7 +6,7 @@ import TableCell from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
 import * as constants from '../../helper/constants';
 
-const TableHeaderCreateUserSection = ({toggleManageUser}) => {
+const TableHeaderCreateUserSection = (props) => {
   return (
       <Table>
         <TableRow>
@@ -15,7 +15,7 @@ const TableHeaderCreateUserSection = ({toggleManageUser}) => {
               <Button 
               variant="contained" 
               sx={{ backgroundColor: '#03b8c5'}}
-              onClick={() => toggleManageUser(constants.CREATE_USER)}
+              onClick={() => props.toggleManageUser(constants.CREATE_USER)}
               startIcon={<AddIcon />}>
               {constants.CREATE_USER}
               </Button>

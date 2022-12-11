@@ -9,7 +9,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import IconButton from '@mui/material/IconButton';
 import './ListItems.css';
 
-const ListItem = ({list,updateSelectedUser}) => {
+const ListItem = (props) => {
   return (
     <TableContainer className='Table-Body' component={Paper}>
       <Table aria-label="user table">
@@ -24,11 +24,11 @@ const ListItem = ({list,updateSelectedUser}) => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {list.map((row) => (
+          {props.list.map((row) => (
             <TableRow
               key={row.name}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-              onClick={() => updateSelectedUser(row)}
+              onClick={() => props.updateSelectedUser(row)}
             >
               <TableCell component="th" scope="row"><p className='Table-Content'>{row.name}</p></TableCell>
               <TableCell><p className='Table-Content'>{row.email}</p></TableCell>

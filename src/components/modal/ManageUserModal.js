@@ -5,16 +5,16 @@ import './ManageUserModal.css'
 import * as constants from '../../helper/constants';
 import UserInputSection from './UserInfoInputSection';
 
-const ManageUserModal = ({toggleManageUser,userInfo}) => {
+const ManageUserModal = (props) => {
     return (
         <div className="modal">
           <div className="overlay"/>
           <div className="modal-content">
             <div id="modal-back-button" className='modal-title'>
-              <Button onClick={() => toggleManageUser()} sx={{ color: 'black'}} startIcon={<ArrowBack />}/>
-              {userInfo && userInfo.name ? constants.UPDATE_USER : constants.CREATE_USER}
+              <Button onClick={() => props.toggleManageUser()} sx={{ color: 'black'}} startIcon={<ArrowBack />}/>
+              {props.userInfo && props.userInfo.name ? constants.UPDATE_USER : constants.CREATE_USER}
             </div>
-            <UserInputSection userInfo={userInfo} toggleManageUser={toggleManageUser}/>
+            <UserInputSection {...props}/>
           </div>
         </div>
     );

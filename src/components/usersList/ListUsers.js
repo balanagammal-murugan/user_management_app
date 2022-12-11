@@ -67,12 +67,19 @@ function ListUsers(){
   } else {
     document.body.classList.remove('active-modal')
   }
-
+  
+  let props = {
+    toggleManageUser,
+    createUser,
+    updateSelectedUser,
+    list : userList,
+    userInfo : selectedUser
+  }
   return (
     <div className="ListPadding">
-     <TableHeaderCreateUserSection toggleManageUser={toggleManageUser}/>
-     <ListItem list={userList} updateSelectedUser={updateSelectedUser}/>
-     {showManageUser ? <ManageUserModal toggleManageUser={toggleManageUser} userInfo={selectedUser}/> : null } 
+     <TableHeaderCreateUserSection {...props}/>
+     <ListItem {...props}/>
+     {showManageUser ? <ManageUserModal {...props}/> : null } 
     </div>
   )
 };
