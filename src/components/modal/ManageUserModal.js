@@ -23,7 +23,7 @@ const ManageUserModal = ({toggleManageUser,userInfo}) => {
 ManageUserModal.propTypes = {
   toggleManageUser: PropTypes.func.isRequired,
   userInfo: PropTypes.shape({
-    id: PropTypes.string.isRequired,
+    id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
     email: PropTypes.string.isRequired,
     role: PropTypes.string.isRequired
