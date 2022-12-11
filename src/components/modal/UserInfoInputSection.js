@@ -11,7 +11,8 @@ const UserInputSection = (props) => {
   const [name, setName] = useState(props.userInfo.name);
   const [email, setEmail] = useState(props.userInfo.email);
   const [role, setRole] = useState(props.userInfo.role ? props.userInfo.role : "User");
-  
+  const [id, _] = useState(props.userInfo.id);
+
   const handleNameChange = (event) => {
     setName(event.target.value);
   };
@@ -21,11 +22,16 @@ const UserInputSection = (props) => {
   const handleRoleChange = (event) => {
     setRole(event.target.value);
   };
-  const createUser = () => {
-    console.log("$$$$$$$$$$$$$$ssss>"+name);
-    console.log("$$$$$$$$$$$$$$ssss>"+email);
-    console.log("$$$$$$$$$$$$$$ssss>"+role);
-};
+  
+  const userOperation = (action) => {
+    let user = {
+      id,
+      name,
+      email,
+      role
+    }
+    action === 'add' ? props.createUser(user) : props.updateUser(user);
+  };
 
   return (
     <>
@@ -44,7 +50,7 @@ const UserInputSection = (props) => {
       <Button 
         variant="contained" 
         sx={{ backgroundColor: '#03b8c5'}}
-        onClick={() => createUser()}>
+        onClick={() => props.userInfo && props.userInfo.name ? userOperation('update') : userOperation('add') }>
           {props.userInfo && props.userInfo.name ? constants.UPDATE_USER : constants.CREATE_USER}
       </Button>
     </>

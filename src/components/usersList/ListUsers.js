@@ -22,8 +22,10 @@ function ListUsers(){
       body: JSON.stringify({ name: user.name, email: user.email, role: user.role})
     };
     return fetch("/user",requestOptions)
-          .then((response) => response.json())
-          .then(() => fetchData());
+          .then(() => {
+            fetchData();
+            toggleManageUser();
+          });
   };
 
   const updateUser = (user) => {
@@ -32,9 +34,11 @@ function ListUsers(){
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ name: user.name, email: user.email, role: user.role})
     };
-    return fetch("/user",requestOptions)
-          .then((response) => response.json())
-          .then(() => fetchData());
+    return fetch("/user/"+user.id,requestOptions)
+          .then(() => {
+            fetchData();
+            toggleManageUser();
+          });
   };
 
   const deleteUser = (user) => {
@@ -43,8 +47,10 @@ function ListUsers(){
       headers: { 'Content-Type': 'application/json' }
     };
     return fetch("/user/"+user.id,requestOptions)
-          .then((response) => response.json())
-          .then(() => fetchData());
+          .then(() => {
+            fetchData();
+            toggleManageUser();
+          });
   };
 
   useEffect(() => {
@@ -71,6 +77,8 @@ function ListUsers(){
   let props = {
     toggleManageUser,
     createUser,
+    updateUser,
+    deleteUser,
     updateSelectedUser,
     list : userList,
     userInfo : selectedUser
