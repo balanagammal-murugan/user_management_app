@@ -11,10 +11,11 @@ const ManageUserModal = (props) => {
           <div className="overlay"/>
           <div className="modal-content">
             <div id="modal-back-button" className='modal-title'>
-              <Button onClick={() => props.toggleManageUser()} sx={{ color: 'black'}} startIcon={<ArrowBack />}/>
+              <Button onClick={() => {props.toggleManageUser()}} sx={{ color: 'black'}} startIcon={<ArrowBack />}/>
               {props.userInfo && props.userInfo.name ? constants.UPDATE_USER : constants.CREATE_USER}
             </div>
             <UserInputSection {...props}/>
+            {props.showErrorUI.show ? <div className='error-text'>{props.showErrorUI.message}</div> : null }
           </div>
         </div>
     );

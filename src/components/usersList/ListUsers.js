@@ -8,6 +8,8 @@ function ListUsers(){
   const [showManageUser, setShowManageUser] = useState(false)
   const [selectedUser, setSelectedUser] = useState({})
   const [userList, setUserList] = useState([{}])
+  const [showErrorUI, setShowErrorUI] = useState(
+    {message : 'oops something went wrong', show: false})
   
   const fetchData = () => {
     return fetch("/user")
@@ -22,9 +24,14 @@ function ListUsers(){
       body: JSON.stringify({ name: user.name, email: user.email, role: user.role})
     };
     return fetch("/user",requestOptions)
-          .then(() => {
+          .then((response) => {
+            if(response.ok){
             fetchData();
+            setShowErrorUI({message:'',show:false});
             toggleManageUser();
+            } else if(response.status == 400) {
+              setShowErrorUI({message : "Invalid input, please provide proper inputs", show : true})
+            }
           });
   };
 
@@ -35,9 +42,14 @@ function ListUsers(){
       body: JSON.stringify({ name: user.name, email: user.email, role: user.role})
     };
     return fetch("/user/"+user.id,requestOptions)
-          .then(() => {
+          .then((response) => {
+            if(response.ok){
             fetchData();
+            setShowErrorUI({message:'',show:false});
             toggleManageUser();
+            } else if(response.status == 400) {
+              setShowErrorUI({message : "Invalid input, please provide proper inputs", show : true})
+            }
           });
   };
 
@@ -47,9 +59,10 @@ function ListUsers(){
       headers: { 'Content-Type': 'application/json' }
     };
     return fetch("/user/"+user.id,requestOptions)
-          .then(() => {
-            fetchData();
-            toggleManageUser();
+          .then((response) => {
+            if(response.ok){
+              fetchData();
+            }
           });
   };
 
@@ -58,6 +71,7 @@ function ListUsers(){
   },[]);
 
   const toggleManageUser = (action) => {
+    setShowErrorUI({message:'',show:false});
     if(action === constants.CREATE_USER)
       setSelectedUser({})
     setShowManageUser(!showManageUser);
@@ -81,7 +95,8 @@ function ListUsers(){
     deleteUser,
     updateSelectedUser,
     list : userList,
-    userInfo : selectedUser
+    userInfo : selectedUser,
+    showErrorUI
   }
   return (
     <div className="ListPadding">

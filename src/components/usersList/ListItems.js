@@ -6,6 +6,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import DeleteIcon from '@mui/icons-material/Delete';
+import UpdateIcon from '@mui/icons-material/Update';
 import IconButton from '@mui/material/IconButton';
 import './ListItems.css';
 
@@ -28,14 +29,16 @@ const ListItem = (props) => {
             <TableRow
               key={row.name}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-              onClick={() => props.updateSelectedUser(row)}
             >
               <TableCell component="th" scope="row"><p className='Table-Content'>{row.name}</p></TableCell>
               <TableCell><p className='Table-Content'>{row.email}</p></TableCell>
               <TableCell><p className='Table-Content'>{row.role}</p></TableCell>
               <TableCell align="left">
-                <IconButton aria-label="delete">
+                <IconButton onClick={() => props.deleteUser(row)} aria-label="delete">
                   <DeleteIcon />
+                </IconButton>
+                <IconButton onClick={() => props.updateSelectedUser(row)} aria-label="update">
+                  <UpdateIcon />
                 </IconButton>
               </TableCell>
             </TableRow>
