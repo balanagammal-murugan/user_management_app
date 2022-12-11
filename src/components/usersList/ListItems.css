@@ -1,0 +1,17 @@
+.Table-Header{
+color: rgb(119, 114, 114);
+text-align: left;
+font-size: small;
+font-weight: bold;
+}
+
+.Table-Content{
+  color: rgb(0, 0, 0);
+  text-align: left;
+  font-size: small;
+  font-weight: bold;
+  }
+
+.Table-Body{
+  background-color : rgba(255,255,255,255)
+}
